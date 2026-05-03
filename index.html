@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Malik Medical Store | Your Health, Our Priority</title>
+  <!-- Google Fonts: Playfair Display, Inter, Pacifico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Pacifico&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Remix Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+  <style>
+    /* Custom styles and font integration */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F5F3F0;
+      color: #2d2d2d;
+    }
+    h1, h2, h3, .font-heading {
+      font-family: 'Playfair Display', serif;
+    }
+    .accent-font {
+      font-family: 'Pacifico', cursive;
+    }
+    .text-primary {
+      color: #6B7C5B;
+    }
+    .bg-primary {
+      background-color: #6B7C5B;
+    }
+    .bg-soft {
+      background-color: #F5F3F0;
+    }
+    .text-accent {
+      color: #D4A843;
+    }
+    .bg-accent {
+      background-color: #D4A843;
+    }
+    .border-primary {
+      border-color: #6B7C5B;
+    }
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.02);
+    }
+    .zoom-img {
+      transition: transform 0.4s ease;
+    }
+    .zoom-img:hover {
+      transform: scale(1.05);
+    }
+    .underline-animation {
+      position: relative;
+    }
+    .underline-animation::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #D4A843;
+      transition: width 0.3s ease;
+    }
+    .underline-animation:hover::after {
+      width: 100%;
+    }
+    .pulse-whatsapp {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .active-filter {
+      background-color: #6B7C5B;
+      color: white;
+      font-weight: 600;
+    }
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F5F3F0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6B7C5B;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-soft text-gray-800">
+
+  <!-- Navigation Bar Sticky -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img src="logo.png" alt="Malik Medical Store Logo" class="h-10 w-auto rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="font-heading text-2xl font-bold text-primary hidden" style="display:none;">Malik Medical</span>
+        <span class="font-heading text-xl font-bold text-primary">Malik Medical</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-gray-700 font-medium">
+        <a href="#home" class="underline-animation hover:text-primary transition">Home</a>
+        <a href="#about" class="underline-animation hover:text-primary transition">About</a>
+        <a href="#products" class="underline-animation hover:text-primary transition">Products</a>
+        <a href="#contact" class="underline-animation hover:text-primary transition">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/923184572651" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition transform hover:scale-105 pulse-whatsapp text-sm md:text-base">
+          <i class="ri-whatsapp-line text-xl"></i> <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+        <button class="md:hidden text-2xl text-primary" id="mobile-menu-btn"><i class="ri-menu-line"></i></button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden flex-col mt-3 space-y-3 pb-2 text-center font-medium text-gray-700">
+      <a href="#home" class="block py-1 hover:text-primary">Home</a>
+      <a href="#about" class="block py-1 hover:text-primary">About</a>
+      <a href="#products" class="block py-1 hover:text-primary">Products</a>
+      <a href="#contact" class="block py-1 hover:text-primary">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-cover bg-center bg-no-repeat min-h-[85vh] flex items-center" style="background-image: url('hero.jpg'); background-color: #6B7C5B;">
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="relative max-w-7xl mx-auto px-6 py-24 md:py-32 w-full text-center md:text-left">
+        <div class="md:w-2/3">
+          <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-4 drop-shadow-lg">MediCare Plus</h1>
+          <p class="text-3xl md:text-4xl font-heading text-accent font-semibold mb-6">Your Health, Our Priority</p>
+          <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-xl">Trusted medicines and healthcare essentials delivered to your door.</p>
+          <a href="#products" class="inline-block bg-accent hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full text-lg transition transform hover:scale-105 shadow-xl">Shop Medicines</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 max-w-7xl mx-auto fade-in-section">
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2">
+          <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">Caring for Your Health, Every Day</h2>
+          <p class="text-gray-700 leading-relaxed mb-4">Malik Medical Store has been a trusted name in healthcare for over a decade. We are committed to providing genuine medicines, supplements, and personal care products with professional guidance.</p>
+          <p class="text-gray-700 leading-relaxed mb-6">Our licensed pharmacy ensures that every product meets strict quality standards. Your well-being is at the heart of everything we do.</p>
+          <div class="flex items-center gap-3 text-primary font-semibold text-lg">
+            <i class="ri-shield-check-line text-2xl"></i> <span>100% Genuine Medicines</span>
+          </div>
+        </div>
+        <div class="md:w-1/2 rounded-2xl overflow-hidden shadow-lg hover-lift">
+          <img src="Our Story of Natural Wellness.jpg" alt="Our Story of Natural Wellness" class="w-full h-auto object-cover zoom-img" style="min-height: 320px;" onerror="this.style.backgroundColor='#e5e7eb'; this.alt='Natural wellness image';">
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-white/60 fade-in-section">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-heading font-bold text-center text-primary mb-12">Why Choose Us</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white p-8 rounded-2xl shadow-md text-center hover-lift">
+            <i class="ri-shield-check-line text-5xl text-accent mb-4"></i>
+            <h3 class="font-heading text-xl font-bold mb-2">Certified Medicines</h3>
+            <p class="text-gray-600">All products are sourced from licensed distributors.</p>
+          </div>
+          <div class="bg-white p-8 rounded-2xl shadow-md text-center hover-lift">
+            <i class="ri-heart-pulse-line text-5xl text-accent mb-4"></i>
+            <h3 class="font-heading text-xl font-bold mb-2">Customer Care</h3>
+            <p class="text-gray-600">Dedicated support for your health queries.</p>
+          </div>
+          <div class="bg-white p-8 rounded-2xl shadow-md text-center hover-lift">
+            <i class="ri-leaf-line text-5xl text-accent mb-4"></i>
+            <h3 class="font-heading text-xl font-bold mb-2">Safe Products</h3>
+            <p class="text-gray-600">Hygienically stored and handled with care.</p>
+          </div>
+          <div class="bg-white p-8 rounded-2xl shadow-md text-center hover-lift">
+            <i class="ri-timer-flash-line text-5xl text-accent mb-4"></i>
+            <h3 class="font-heading text-xl font-bold mb-2">Fast Delivery</h3>
+            <p class="text-gray-600">Quick and reliable doorstep service.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="py-16 max-w-7xl mx-auto px-6 fade-in-section">
+      <h2 class="text-4xl font-heading font-bold text-center text-primary mb-10">Shop by Category</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="category-card bg-white p-4 rounded-xl shadow text-center cursor-pointer hover-lift" data-filter="medicines">
+          <img src="category-medicines.jpg" alt="Prescription Medicines" class="w-full h-28 object-cover rounded-lg mb-2 zoom-img" onerror="this.style.backgroundColor='#e0e7e0';">
+          <span class="font-semibold text-gray-700">Prescription Medicines</span>
+        </div>
+        <div class="category-card bg-white p-4 rounded-xl shadow text-center cursor-pointer hover-lift" data-filter="supplements">
+          <img src="category-supplements.jpg" alt="Health Supplements" class="w-full h-28 object-cover rounded-lg mb-2 zoom-img" onerror="this.style.backgroundColor='#e0e7e0';">
+          <span class="font-semibold text-gray-700">Health Supplements</span>
+        </div>
+        <div class="category-card bg-white p-4 rounded-xl shadow text-center cursor-pointer hover-lift" data-filter="personal">
+          <img src="category-personal.jpg" alt="Personal Care" class="w-full h-28 object-cover rounded-lg mb-2 zoom-img" onerror="this.style.backgroundColor='#e0e7e0';">
+          <span class="font-semibold text-gray-700">Personal Care</span>
+        </div>
+        <div class="category-card bg-white p-4 rounded-xl shadow text-center cursor-pointer hover-lift" data-filter="equipment">
+          <img src="category-equipment.jpg" alt="Medical Equipment" class="w-full h-28 object-cover rounded-lg mb-2 zoom-img" onerror="this.style.backgroundColor='#e0e7e0';">
+          <span class="font-semibold text-gray-700">Medical Equipment</span>
+        </div>
+        <div class="category-card bg-white p-4 rounded-xl shadow text-center cursor-pointer hover-lift" data-filter="herbal">
+          <img src="category-herbal.jpg" alt="Herbal Remedies" class="w-full h-28 object-cover rounded-lg mb-2 zoom-img" onerror="this.style.backgroundColor='#e0e7e0';">
+          <span class="font-semibold text-gray-700">Herbal Remedies</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Grid with Filters -->
+    <section id="products" class="py-16 max-w-7xl mx-auto px-6 fade-in-section">
+      <h2 class="text-4xl font-heading font-bold text-center text-primary mb-8">All Products</h2>
+      <div class="flex flex-wrap justify-center gap-3 mb-10" id="filter-buttons">
+        <button class="filter-btn px-5 py-2 rounded-full border border-primary text-primary font-medium active-filter" data-filter="all">All Products</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-primary text-primary font-medium" data-filter="medicines">Medicines</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-primary text-primary font-medium" data-filter="supplements">Supplements</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-primary text-primary font-medium" data-filter="personal">Personal Care</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-primary text-primary font-medium" data-filter="equipment">Equipment</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-primary text-primary font-medium" data-filter="herbal">Herbal</button>
+      </div>
+      <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Products injected via JS -->
+      </div>
+    </section>
+
+    <!-- Best Sellers -->
+    <section class="py-16 bg-white/70 fade-in-section">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-heading font-bold text-center text-primary mb-10">Best Sellers</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="best-sellers-grid"></div>
+      </div>
+    </section>
+
+    <!-- Our Promise -->
+    <section class="py-16 max-w-7xl mx-auto px-6 fade-in-section flex flex-col md:flex-row items-center gap-10">
+      <div class="md:w-1/2">
+        <h2 class="text-4xl font-heading font-bold text-primary mb-6">Our Promise</h2>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4"><i class="ri-medal-line text-3xl text-accent"></i><span class="text-xl font-semibold">100% Genuine Medicines</span></div>
+          <div class="flex items-center gap-4"><i class="ri-building-4-line text-3xl text-accent"></i><span class="text-xl font-semibold">Licensed Pharmacy</span></div>
+        </div>
+      </div>
+      <div class="md:w-1/2 rounded-2xl overflow-hidden shadow-lg">
+        <img src="Our Promise to You.jpg" alt="Our Promise to You" class="w-full h-auto object-cover zoom-img" onerror="this.style.backgroundColor='#d1d5db';">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-primary text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <img src="logo.png" alt="Logo" class="h-10 w-auto brightness-0 invert" onerror="this.style.display='none';">
+          <span class="font-heading text-2xl font-bold">Malik Medical</span>
+        </div>
+        <p class="text-gray-200">Your trusted partner in health and wellness. Delivering care since 2010.</p>
+      </div>
+      <div>
+        <h4 class="font-heading text-xl mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="#home" class="hover:text-accent transition">Home</a></li>
+          <li><a href="#about" class="hover:text-accent transition">About</a></li>
+          <li><a href="#products" class="hover:text-accent transition">Products</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading text-xl mb-4">Connect</h4>
+        <a href="https://wa.me/923184572651" target="_blank" class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 px-5 py-3 rounded-full text-white font-semibold transition mb-4">
+          <i class="ri-whatsapp-line text-xl"></i> WhatsApp Order
+        </a>
+        <div class="flex space-x-4 text-2xl mt-3">
+          <a href="#" class="hover:text-accent"><i class="ri-facebook-circle-line"></i></a>
+          <a href="#" class="hover:text-accent"><i class="ri-instagram-line"></i></a>
+          <a href="#" class="hover:text-accent"><i class="ri-twitter-x-line"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-sm text-gray-300 mt-10 border-t border-white/20 pt-6">
+      © 2025 Malik Medical Store. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
+      <button id="close-modal" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800"><i class="ri-close-line"></i></button>
+      <img id="modal-img" src="" class="w-full h-56 object-cover rounded-xl mb-4" alt="product">
+      <h3 class="text-2xl font-heading font-bold" id="modal-name"></h3>
+      <p class="text-gray-600 my-2" id="modal-desc"></p>
+      <p class="text-sm text-gray-500 mb-3" id="modal-ingredients"></p>
+      <p class="text-xl font-bold text-primary mb-4" id="modal-price"></p>
+      <div class="flex items-center gap-3 mb-4">
+        <label class="font-medium">Quantity:</label>
+        <input type="number" id="modal-qty" value="1" min="1" class="w-20 border rounded px-2 py-1 text-center">
+      </div>
+      <button id="modal-checkout-btn" class="w-full bg-accent hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-xl transition">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 relative">
+      <button id="close-checkout" class="absolute top-4 right-4 text-2xl text-gray-500"><i class="ri-close-line"></i></button>
+      <h3 class="text-2xl font-heading font-bold mb-4">Order Details</h3>
+      <div id="order-summary" class="bg-gray-50 p-3 rounded-lg mb-4 text-sm"></div>
+      <input type="text" id="cust-name" placeholder="Full Name" class="w-full border rounded-lg p-3 mb-3">
+      <input type="tel" id="cust-phone" placeholder="Phone Number" class="w-full border rounded-lg p-3 mb-3">
+      <textarea id="cust-address" placeholder="Delivery Address" class="w-full border rounded-lg p-3 mb-4" rows="2"></textarea>
+      <button id="send-whatsapp" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"><i class="ri-whatsapp-line"></i> Send Order via WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Product data
+      const products = [
+        { id:1, name:"Paracetamol Tablets", price:120, rating:5, reviews:200, category:"medicines", desc:"Effective pain relief and fever reducer. Suitable for adults and children.", ingredients:"Paracetamol 500mg", image:"product-paracetamol.jpg" },
+        { id:2, name:"Vitamin C Capsules", price:800, rating:4, reviews:85, category:"supplements", desc:"Boosts immunity and skin health. Antioxidant support.", ingredients:"Ascorbic Acid 1000mg", image:"product-vitaminc.jpg" },
+        { id:3, name:"Face Mask Pack", price:500, rating:4, reviews:60, category:"personal", desc:"3-ply disposable masks for daily protection.", ingredients:"Non-woven fabric", image:"product-mask.jpg" },
+        { id:4, name:"Digital Thermometer", price:1500, rating:5, reviews:95, category:"equipment", desc:"Fast and accurate digital reading. Suitable for all ages.", ingredients:"Electronic device", image:"product-thermometer.jpg" },
+        { id:5, name:"Hand Sanitizer", price:300, rating:5, reviews:150, category:"personal", desc:"Kills 99.9% germs. Moisturizing formula.", ingredients:"70% Alcohol, Aloe Vera", image:"product-sanitizer.jpg" },
+        { id:6, name:"Blood Pressure Monitor", price:4500, rating:5, reviews:70, category:"equipment", desc:"Automatic upper arm monitor with clear display.", ingredients:"Medical device", image:"product-bpmonitor.jpg" },
+        { id:7, name:"Calcium Tablets", price:1200, rating:4, reviews:65, category:"supplements", desc:"Supports bone health with Vitamin D3.", ingredients:"Calcium Carbonate 500mg", image:"product-calcium.jpg" },
+        { id:8, name:"Cough Syrup", price:350, rating:4, reviews:90, category:"medicines", desc:"Relieves dry cough and soothes throat.", ingredients:"Dextromethorphan", image:"product-cough.jpg" },
+        { id:9, name:"Herbal Immunity Tea", price:900, rating:5, reviews:110, category:"herbal", desc:"Blend of tulsi, ginger and turmeric.", ingredients:"Tulsi, Ginger, Turmeric", image:"product-tea.jpg" }
+      ];
+
+      const bestSellerIds = [1, 6, 2]; // Paracetamol, BP Monitor, Vitamin C
+      let currentProduct = null;
+
+      // DOM elements
+      const grid = document.getElementById('products-grid');
+      const bestGrid = document.getElementById('best-sellers-grid');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const categoryCards = document.querySelectorAll('.category-card');
+      const modal = document.getElementById('product-modal');
+      const checkoutModal = document.getElementById('checkout-modal');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      // Render product card
+      function renderProductCard(product) {
+        const stars = Array.from({length:5}, (_,i)=> i<product.rating ? 'ri-star-fill' : 'ri-star-line').map(s=>`<i class="${s} text-yellow-500 text-sm"></i>`).join('');
+        return `
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden hover-lift flex flex-col" data-category="${product.category}">
+            <div class="h-52 overflow-hidden">
+              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover zoom-img" onerror="this.style.backgroundColor='#e2e8f0';">
+            </div>
+            <div class="p-5 flex flex-col flex-grow">
+              <div class="flex items-center gap-1 mb-1">${stars} <span class="text-xs text-gray-500 ml-1">(${product.reviews})</span></div>
+              <h4 class="font-bold text-lg text-gray-800">${product.name}</h4>
+              <p class="text-sm text-gray-500 mt-1 line-clamp-2">${product.desc}</p>
+              <p class="text-primary font-bold text-xl mt-2">PKR ${product.price}</p>
+              <button class="mt-auto buy-now-btn bg-primary hover:bg-green-800 text-white py-2 px-4 rounded-lg transition w-full text-sm font-medium" data-id="${product.id}">Buy Now</button>
+            </div>
+          </div>`;
+      }
+
+      function renderAllProducts(filter = 'all') {
+        const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+        grid.innerHTML = filtered.map(p => renderProductCard(p)).join('');
+        attachBuyEvents();
+      }
+
+      function renderBestSellers() {
+        const best = products.filter(p => bestSellerIds.includes(p.id));
+        bestGrid.innerHTML = best.map(p => `
+          <div class="bg-white rounded-2xl shadow-md p-5 relative hover-lift">
+            <span class="absolute top-3 right-3 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">Best Seller</span>
+            <img src="${p.image}" class="w-full h-44 object-cover rounded-xl mb-3" onerror="this.style.backgroundColor='#e2e8f0';">
+            <div class="flex items-center gap-1 text-yellow-500 text-sm">${Array.from({length:5}, (_,i)=> '<i class="ri-star-fill"></i>').join('')}</div>
+            <h4 class="font-bold text-lg">${p.name}</h4>
+            <p class="text-primary font-bold text-lg">PKR ${p.price}</p>
+            <button class="buy-now-btn mt-2 bg-primary text-white w-full py-2 rounded-lg text-sm" data-id="${p.id}">Buy Now</button>
+          </div>`).join('');
+        attachBuyEvents();
+      }
+
+      function attachBuyEvents() {
+        document.querySelectorAll('.buy-now-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            currentProduct = products.find(p => p.id === id);
+            if(currentProduct) openProductModal(currentProduct);
+          });
+        });
+      }
+
+      function openProductModal(product) {
+        document.getElementById('modal-img').src = product.image;
+        document.getElementById('modal-name').textContent = product.name;
+        document.getElementById('modal-desc').textContent = product.desc;
+        document.getElementById('modal-ingredients').textContent = `Ingredients: ${product.ingredients}`;
+        document.getElementById('modal-price').textContent = `PKR ${product.price}`;
+        document.getElementById('modal-qty').value = 1;
+        modal.classList.remove('hidden');
+      }
+
+      function closeModal(modalEl) { modalEl.classList.add('hidden'); }
+
+      document.getElementById('close-modal').addEventListener('click', ()=> closeModal(modal));
+      document.getElementById('close-checkout').addEventListener('click', ()=> closeModal(checkoutModal));
+      modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(modal); });
+      checkoutModal.addEventListener('click', (e) => { if(e.target === checkoutModal) closeModal(checkoutModal); });
+
+      document.getElementById('modal-checkout-btn').addEventListener('click', ()=>{
+        if(!currentProduct) return;
+        const qty = parseInt(document.getElementById('modal-qty').value) || 1;
+        document.getElementById('order-summary').innerHTML = `
+          <p><strong>${currentProduct.name}</strong> x ${qty}</p>
+          <p class="text-lg font-bold">Total: PKR ${currentProduct.price * qty}</p>`;
+        closeModal(modal);
+        checkoutModal.classList.remove('hidden');
+      });
+
+      document.getElementById('send-whatsapp').addEventListener('click', ()=>{
+        if(!currentProduct) return;
+        const qty = parseInt(document.getElementById('modal-qty').value) || 1;
+        const name = document.getElementById('cust-name').value.trim();
+        const phone = document.getElementById('cust-phone').value.trim();
+        const address = document.getElementById('cust-address').value.trim();
+        if(!name || !phone || !address) { alert('Please fill all fields'); return; }
+        const total = currentProduct.price * qty;
+        const message = `Hello, I want to order:%0AProduct: ${currentProduct.name}%0AQuantity: ${qty}%0ATotal: PKR ${total}%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}`;
+        window.open(`https://wa.me/923184572651?text=${message}`, '_blank');
+        closeModal(checkoutModal);
+      });
+
+      // Filter buttons
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active-filter', 'bg-primary', 'text-white'));
+          this.classList.add('active-filter', 'bg-primary', 'text-white');
+          renderAllProducts(this.dataset.filter);
+        });
+      });
+
+      categoryCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const filter = this.dataset.filter;
+          filterBtns.forEach(b => {
+            b.classList.remove('active-filter', 'bg-primary', 'text-white');
+            if(b.dataset.filter === filter) b.classList.add('active-filter', 'bg-primary', 'text-white');
+          });
+          renderAllProducts(filter);
+          document.getElementById('products').scrollIntoView({behavior:'smooth'});
+        });
+      });
+
+      // Mobile menu toggle
+      mobileMenuBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+
+      // Fade in on scroll
+      const fadeSections = document.querySelectorAll('.fade-in-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.15 });
+      fadeSections.forEach(sec => observer.observe(sec));
+
+      // Initial render
+      renderAllProducts();
+      renderBestSellers();
+    })();
+  </script>
+</body>
+</html>
